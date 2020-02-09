@@ -22,3 +22,6 @@ yarn-error.log*
 
 # local builds
 *.zip
+
+# lock files
+*-lock.json
