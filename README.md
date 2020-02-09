@@ -1,5 +1,8 @@
 # Azure Vision Workshop!
 
+## Step 0
+Create Azure Account
+
 ## Step 1
 Deploy resources
 
