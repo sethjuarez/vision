@@ -1,0 +1,5 @@
+pillow
+requests
+azure-functions
+azure-storage-blob
+azure-cognitiveservices-vision-customvision

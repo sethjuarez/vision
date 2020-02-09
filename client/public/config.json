@@ -1,0 +1,4 @@
+{
+    "saveEndpoint": "http://localhost:7071/api/save",
+    "maxSubmitCount": 4
+}

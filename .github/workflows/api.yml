@@ -1,0 +1,44 @@
+name: api ci
+
+on:
+  push:
+    paths:
+      - 'api/**'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    # checkout the repo
+    - uses: actions/checkout@master
+    
+    # az login
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.CREDENTIALS }}
+
+    - name: Setup Python 3.6
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.6
+
+    - name: 'Run pip'
+      shell: bash
+      run: |
+        # If your function app project is not located in your repository's root
+        # Please change your directory for pip in pushd
+        pushd api
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt --target=".python_packages/lib/python3.6/site-packages"
+        popd
+        
+    - name: 'Run Azure Functions Action'
+      uses: Azure/functions-action@v1
+      id: fa
+      with:
+        app-name: ${{ secrets.APP_NAME }}
+        package: '.'
+
+    - name: 'show endpoint'
+      run: |
+        echo "${{ steps.fa.outputs.app-url }}"
