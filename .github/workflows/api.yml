@@ -37,7 +37,7 @@ jobs:
       id: fa
       with:
         app-name: ${{ secrets.FUNC_APP }}
-        package: '.'
+        package: 'api'
 
     - name: 'show endpoint'
       run: |
