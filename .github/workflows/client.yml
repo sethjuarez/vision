@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       WEB_PATH: $web
-      ACCOUNT: ${{ secrets.account }}
-      KEY: ${{ secrets.key }}
+      ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
+      KEY: ${{ secrets.STORAGE_KEY }}
     steps:
     # checkout the repo
     - uses: actions/checkout@master
