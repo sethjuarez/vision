@@ -49,18 +49,18 @@ jobs:
         
         # install dependencies, build, and test
         - name: npm install, build
-            run: |
-                pushd client
-                npm install
-                npm run build --if-present
-                popd
+          run: |
+            pushd client
+            npm install
+            npm run build --if-present
+            popd
 
         # clear old site
         - name: clear old site
-            run : |
-                az storage blob delete-batch --source $WEB_PATH --account-name $ACCOUNT --account-key $KEY
+          run : |
+            az storage blob delete-batch --source $WEB_PATH --account-name $ACCOUNT --account-key $KEY
 
         # push to azure storage
         - name: push to azure storage
-            run : |
-                az storage blob upload-batch -s client/dist -d $WEB_PATH --account-name $ACCOUNT --account-key $KEY
+          run : |
+            az storage blob upload-batch -s client/dist -d $WEB_PATH --account-name $ACCOUNT --account-key $KEY
