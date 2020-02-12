@@ -1,0 +1,66 @@
+name: full ci
+
+on:
+    push:
+        branches:
+            master
+
+jobs:
+    build-and-deploy-api:
+        runs-on: ubuntu-latest
+        steps:
+        # checkout the repo
+        - uses: actions/checkout@master
+        
+        # az login
+        - uses: azure/login@v1
+          with:
+            creds: ${{ secrets.CREDENTIALS }}
+    
+        - name: Setup Python 3.6
+          uses: actions/setup-python@v1
+          with:
+            python-version: 3.6
+    
+        - name: 'Run pip'
+          shell: bash
+          run: |
+            pushd api
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt --target=".python_packages/lib/python3.6/site-packages"
+            popd
+            
+        - name: 'Run Azure Functions Action'
+          uses: Azure/functions-action@v1
+          id: fa
+          with:
+            app-name: ${{ secrets.FUNC_APP }}
+            package: 'api'
+
+  build-and-deploy-client:
+    runs-on: ubuntu-latest
+    env:
+      WEB_PATH: $web
+      ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
+      KEY: ${{ secrets.STORAGE_KEY }}
+    steps:
+    # checkout the repo
+    - uses: actions/checkout@master
+    
+    # install dependencies, build, and test
+    - name: npm install, build
+      run: |
+        pushd client
+        npm install
+        npm run build --if-present
+        popd
+
+    # clear old site
+    - name: clear old site
+      run : |
+        az storage blob delete-batch --source $WEB_PATH --account-name $ACCOUNT --account-key $KEY
+
+    # push to azure storage
+    - name: push to azure storage
+      run : |
+        az storage blob upload-batch -s client/dist -d $WEB_PATH --account-name $ACCOUNT --account-key $KEY
