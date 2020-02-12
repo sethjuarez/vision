@@ -8,9 +8,8 @@
                 <li>Spacebar to start</li>
             </ol>
             <p><strong>Training Instructions</strong></p>
-            <ol>
-                <li>Once you've uploaded a balanced set of pictures for each category click <strong>Train</strong></li>
-            </ol>
+            <p>Once you uploaded a balanced set of pictures for each category
+                head over to <a href="customvision.ai">customvision</a> to train and download the model</p>
         </div>
         <div id="radioselection">
             <span :key="item+index" v-for="(item, index) in labels">
@@ -20,7 +19,6 @@
                 <label :for="item">{{item}}</label>
                 &nbsp;
             </span>
-            <div id="console"><button @click="trainModel()" type="button">Train!</button></div>
             <div v-if="interval != null">Click Spacebar to Stop!</div>
         </div>
         <div id="images">
@@ -84,9 +82,7 @@
                     'width': 0,
                     'height': 0
                 },
-                appSettings: '',
-                iteration: null,
-                export: null
+                appSettings: ''
             }
         },
         mounted: async function () {
@@ -218,34 +214,6 @@
                     this.list = []
                     this.processing = false
                 } catch(error) {
-                    // uh oh - log error and reset
-                    console.log(error)
-                    this.processing = false
-                }
-            },
-            trainModel: async function () {
-                this.processing = true
-                this.message = 'training model'
-                try {
-                    let url = this.appSettings.trainEndpoint
-                    let response = await axios.post(url)
-                    this.iteration = response.data
-                    this.processing = false
-                } catch (error) {
-                    // uh oh - log error and reset
-                    console.log(error)
-                    this.processing = false
-                }
-            },
-            getModel: async function () {
-                this.processing = true
-                this.message = 'fetching model'
-                try {
-                    let url = this.appSettings.modelEndpoint
-                    let response = await axios.post(url)
-                    this.export = response.data
-                    this.processing = false
-                } catch (error) {
                     // uh oh - log error and reset
                     console.log(error)
                     this.processing = false
