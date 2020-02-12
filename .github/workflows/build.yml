@@ -40,9 +40,9 @@ jobs:
     build-and-deploy-client:
         runs-on: ubuntu-latest
         env:
-        WEB_PATH: $web
-        ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
-        KEY: ${{ secrets.STORAGE_KEY }}
+          WEB_PATH: $web
+          ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
+          KEY: ${{ secrets.STORAGE_KEY }}
         steps:
         # checkout the repo
         - uses: actions/checkout@master
