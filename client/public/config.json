@@ -1,7 +1,4 @@
 {
     "saveEndpoint": "http://localhost:7071/api/save",
-    "trainEndpoint": "http://localhost:7071/api/train",
-    "statusEndpoint": "http://localhost:7071/api/train",
-    "modelEndpoint": "http://localhost:7071/api/model",
     "maxSubmitCount": 4
 }
