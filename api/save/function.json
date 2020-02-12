@@ -1,5 +1,5 @@
 {
-  "scriptFile": "func.py",
+  "scriptFile": "save.py",
   "entryPoint": "main",
   "bindings": [
     {

@@ -7,12 +7,10 @@
                 <li>Get into position!</li>
                 <li>Spacebar to start</li>
             </ol>
-            <p>Also, a couple of things to note:</p>
-            <ul>
-                <li>Max images that can be submitted at a time is 64 (Current count is at {{list.length}})</li>
-                <li>These images will be used to train a machine learning model (this means you're ok with what you submit).</li>
-                <li>Don't submit anything you don't wish others to see</li>
-            </ul>
+            <p><strong>Training Instructions</strong></p>
+            <ol>
+                <li>Once you've uploaded a balanced set of pictures for each category click <strong>Train</strong></li>
+            </ol>
         </div>
         <div id="radioselection">
             <span :key="item+index" v-for="(item, index) in labels">
@@ -22,6 +20,7 @@
                 <label :for="item">{{item}}</label>
                 &nbsp;
             </span>
+            <div id="console"><button @click="trainModel()" type="button">Train!</button></div>
             <div v-if="interval != null">Click Spacebar to Stop!</div>
         </div>
         <div id="images">
@@ -53,7 +52,7 @@
                 <button type="button" v-if="list.length > 0" v-on:click="submitImages()" v-show="!processing">Submit Training Data</button>
             </div>
         </div>
-        <div id="notifications" v-show="processing">
+        <div id="notifications" v-show="processing" v-on:click="processing=!processing"> 
             {{message}}
         </div>
     </div>
@@ -61,7 +60,6 @@
 
 <script>
     import axios from 'axios'
-    import $ from 'jquery'
     import * as cvstfjs from 'customvision-tfjs'
 
     export default {
@@ -78,22 +76,27 @@
                 interval: null,
                 model: null,
                 modelmeta: null,
-                labels: [],
+                labels: ['none', 'rock', 'paper', 'scissors'],
+                modelLabels: [],
                 probabilities: [],
                 guess: 'none',
                 vdim: {
                     'width': 0,
                     'height': 0
                 },
-                appSettings: ''
+                appSettings: '',
+                iteration: null,
+                export: null
             }
         },
         mounted: async function () {
             // map spacebar key event
             document.onkeyup = this.key
+
             // get canvas context
             let canvas = document.getElementById('canvas')
             this.canvas = canvas.getContext('2d')
+
             // run and start video
             this.video = document.getElementById('video')
             if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
@@ -109,23 +112,36 @@
             }
 
             // load appSettings
-            this.appSettings = await $.get('config.json')
+            let response = await axios.get('config.json')
+            this.appSettings = response.data
+            console.log(this.appSettings)
 
             // load model
-            this.model = new cvstfjs.ClassificationModel()
-            await this.model.loadModelAsync('model/model.json')
-
-            // load metadata and labels
-            this.modelmeta = await $.getJSON('model/cvexport.manifest')
-            const l = await $.get('model/labels.txt')
-            this.labels = l.split('\n').map(e => {
-                return e.trim()
-            })
+            await this.loadModel()
             
-            // start interval
-            setInterval(this.predict, 500)
         },
         methods: {
+            loadModel: async function() {
+                // load model
+                this.model = new cvstfjs.ClassificationModel()
+                try {
+                    await this.model.loadModelAsync('model/model.json')
+
+                    // load metadata and labels
+                    let manifest = await axios.get('model/cvexport.manifest')
+                    this.modelmeta = manifest.data
+                    let l = await axios.get('model/labels.txt')
+                    this.modelLabels = l.data.split('\n').map(e => {
+                        return e.trim()
+                    })
+                    
+                    // start prediction interval
+                    setInterval(this.predict, 1000)
+                } catch (error) {
+                    this.guess = 'model error'
+                    console.log(error)
+                }
+            },
             predict: async function () {
                 // draw video image on canvas
                 var pic = document.getElementById('rendered')
@@ -137,9 +153,9 @@
                 let pred = prediction[0]
 
                 // get label and populate probabilities
-                this.guess = this.labels[pred.indexOf(Math.max(...pred))]
+                this.guess = this.modelLabels[pred.indexOf(Math.max(...pred))]
                 this.probabilities = pred.map((e, i) => { 
-                    return { 'label': this.labels[i], 'probability': e*100 }
+                    return { 'label': this.modelLabels[i], 'probability': e*100 }
                 })
             },
             key: function (event) {
@@ -202,6 +218,34 @@
                     this.list = []
                     this.processing = false
                 } catch(error) {
+                    // uh oh - log error and reset
+                    console.log(error)
+                    this.processing = false
+                }
+            },
+            trainModel: async function () {
+                this.processing = true
+                this.message = 'training model'
+                try {
+                    let url = this.appSettings.trainEndpoint
+                    let response = await axios.post(url)
+                    this.iteration = response.data
+                    this.processing = false
+                } catch (error) {
+                    // uh oh - log error and reset
+                    console.log(error)
+                    this.processing = false
+                }
+            },
+            getModel: async function () {
+                this.processing = true
+                this.message = 'fetching model'
+                try {
+                    let url = this.appSettings.modelEndpoint
+                    let response = await axios.post(url)
+                    this.export = response.data
+                    this.processing = false
+                } catch (error) {
                     // uh oh - log error and reset
                     console.log(error)
                     this.processing = false
@@ -314,5 +358,8 @@
 
     #exported {
         margin-bottom: 5px;
+    }
+    #console {
+        margin: 20px;
     }
 </style>
