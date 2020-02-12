@@ -36,31 +36,31 @@ jobs:
           with:
             app-name: ${{ secrets.FUNC_APP }}
             package: 'api'
+            
+    build-and-deploy-client:
+        runs-on: ubuntu-latest
+        env:
+        WEB_PATH: $web
+        ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
+        KEY: ${{ secrets.STORAGE_KEY }}
+        steps:
+        # checkout the repo
+        - uses: actions/checkout@master
+        
+        # install dependencies, build, and test
+        - name: npm install, build
+        run: |
+            pushd client
+            npm install
+            npm run build --if-present
+            popd
 
-  build-and-deploy-client:
-    runs-on: ubuntu-latest
-    env:
-      WEB_PATH: $web
-      ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
-      KEY: ${{ secrets.STORAGE_KEY }}
-    steps:
-    # checkout the repo
-    - uses: actions/checkout@master
-    
-    # install dependencies, build, and test
-    - name: npm install, build
-      run: |
-        pushd client
-        npm install
-        npm run build --if-present
-        popd
+        # clear old site
+        - name: clear old site
+        run : |
+            az storage blob delete-batch --source $WEB_PATH --account-name $ACCOUNT --account-key $KEY
 
-    # clear old site
-    - name: clear old site
-      run : |
-        az storage blob delete-batch --source $WEB_PATH --account-name $ACCOUNT --account-key $KEY
-
-    # push to azure storage
-    - name: push to azure storage
-      run : |
-        az storage blob upload-batch -s client/dist -d $WEB_PATH --account-name $ACCOUNT --account-key $KEY
+        # push to azure storage
+        - name: push to azure storage
+        run : |
+            az storage blob upload-batch -s client/dist -d $WEB_PATH --account-name $ACCOUNT --account-key $KEY
