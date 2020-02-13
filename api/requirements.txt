@@ -1,5 +1,5 @@
 pillow
 requests
 azure-functions
-azure-storage-blob
+azure-storage-blob==2.1.0
 azure-cognitiveservices-vision-customvision
