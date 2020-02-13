@@ -1,4 +1,4 @@
 {
-    "saveEndpoint": "http://localhost:7071/api/save",
+    "saveEndpoint": "https://supervizfuncapp.azurewebsites.net/api/save",
     "maxSubmitCount": 4
 }
