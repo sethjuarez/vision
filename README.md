@@ -12,7 +12,7 @@ Pre-requisites for this workshop are:
 2. A [GitHub](https://www.github.com) Account
 3. A [Microsoft](https://signup.live.com/) personal account (can register with live.com, outlook.com, gmail.com, etc...)
 3. An [Azure](https://www.microsoftazurepass.com/) Account (passes will be provided for this workshop)
-4. Excitement to build a AI Model!!!! :+1: :sparkles: :camel: :tada:
+4. Excitement to build an AI Model!!!! :+1: :sparkles: :camel: :tada:
 :rocket: :metal: :octocat: 
 
 ---
@@ -30,17 +30,17 @@ It is recommended you perform this step before the workshop. Once you complete t
 You can log into Azure at:
 https://portal.azure.com
 
-**Please make sure you use the credentials you used to sign-up for the Azure Pass to sign-in. If your browser has cached credentials Work or School credentials already, then you may want to use a Private browser session to access the portal.**
+**Please make sure you use the credentials you used to sign-up for the Azure Pass to sign-in. If your browser has cached Work or School credentials already, then you may want to use a Private browser session to access the portal.**
 
 ## Local Environment Notes
 You can use either the [Azure Cloud Shell](https://shell.azure.com) or your local terminal to perform this workshop. It is recommended to use the Cloud Shell as all the dependencies are already installed.
 
 If you choose to use your local environment please ensure:
 
-1. Ensure Python 3.7.6 and Pip3 are installed 
-2. Ensure python and pip are linked to Python3 and Pip3
+1. Python 3.7.6 and Pip3 are installed 
+2. python and pip are linked to Python3 and Pip3
 2. [Azure Command Line Interface](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) is installed
-3. Ensure git is installed
+3. Git is installed
 4. You know how to use the tools above as instructions below will focus on the Cloud Shell
 
 **For Windows, you must have Windows Subsystem for Linux installed**
@@ -68,11 +68,12 @@ To expedite this portion of the workshop a bash shell script was created that ru
 **NOTE:** The first time you run the Azure Cloud Shell, a wizard will pop up, asking you to set-up a storage account for persistent storage. Just select the default options and click OK.
 
 4. Clone the repo:
+
     ```
     git clone (your repo)
     ```
 
-IF you cloned locally, upload the file to Azure Cloud Shell:
+IF you cloned locally, upload the file "deploy.sh" to Azure Cloud Shell:
 
 ![UPLOAD](/imgs/02-uploaddeploysh.png)
 
@@ -91,11 +92,13 @@ Wait for it to complete. It will take a few minutes.
 
 ![OUT](/imgs/03-terminalout.png)
 
-Once the output completes, you will see hte secrets necessary to perform the next step. These values are also stored in a local text file (creds.txt).
+Once the output completes, you will see the secrets necessary to perform the next step. These values are also stored in a local text file (creds.txt). These values are very important for the next step!
 
-go to the resource group to verify all the resources were created successfully:
+The unique name you used above is the name of the Resource Group in Azure where the resources were deployed. Go to the resource group in the Azure Portal to verify all the resources were created successfully:
 
 ![RESOURCES](/imgs/04-resourcegroup.png)
+
+You can search for "Resource Groups" in the top search bar if you cannot find yours.
 
 ## Step 2 - Let's add some secrets, ssshh!! ;)
 
@@ -106,9 +109,7 @@ Let's setup the keys necessary for the Azure services to authorize communication
 
 ![SECRETPAGE](/imgs/05-secrets.png)
 
-2. For each of the secret values that were output in Step 1.5 above, create a secret in GitHub
-
-![SECRETS](/imgs/06-secretsout.png)
+2. For each of the secret values that were output in Step 1.5 above, create a secret in GitHub. 
 
 - Add new secret
     - NAME: FUNC_APP
@@ -123,13 +124,18 @@ Let's setup the keys necessary for the Azure services to authorize communication
     - NAME: CREDENTIALS
     - VALUE: {paste the entire JSON including curly braces}
 
+The final result after saving each secret should look like this:
+
+![SECRETS](/imgs/06-secretsout.png)
+
+
 3. We need to update the web application configuration for the function app save endpoint so the save function will work.
 
 First go to the function app in the resource group:
 
 ![FUNCAPP](/imgs//07-functionapp.png)
 
-Then, get the URL for the endpoint
+Then, copy the URL for the endpoint
 
 ![FUNCURL](/imgs/08-funcurl.png)
 
@@ -147,9 +153,11 @@ and open the following file:
 
 ![CONFIG](/imgs/11-configjson.png)
 
-And then we are going to replace the first portion of the URL with the function app URL:
+And then we are going to replace the first portion of the URL with the function app URL you copied above:
 
 ![NEWURL](/imgs/12-newurl.png)
+
+4. Let's save and push your changes to the repo:
 
 ```
 git add .
@@ -176,7 +184,8 @@ When you changed a file in the repo, it automatically kicked off the build. With
 
 ![FULLCI](/imgs/13-FullCI.png)
 
-Click on "full ci" and take a look at the process status
+Click on "full ci" and take a look at the process status yourself as an exercise.
+
 
 ## Step 4 - Let's Play
 
@@ -230,7 +239,7 @@ Ok, maybe not. Instead let's train the model we created.
 
 ![ZIP](/imgs/21-zipfile.png)
 
-2. Go back to the Storage account and open the Containers and the $Web folder
+2. Go back to the Storage account and open "Containers" and then open the  "$Web" folder
 
 ![CONTAINER](/imgs/23-containers.png)
 
