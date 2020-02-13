@@ -16,7 +16,6 @@ Pre-requisites for this workshop are:
 :rocket: :metal: :octocat: 
 
 ---
-![STOP](https://en.wikipedia.org/wiki/Stop_sign#/media/File:STOP_sign.jpg) 
 **Make sure you DO NOT use your WORK or SCHOOL account, You MUST use the Azure Pass provided and a Microsoft Personal Account**
 ---
 
