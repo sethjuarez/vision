@@ -56,6 +56,23 @@ The services that will be deployed are all Platform as a Service and very lightw
 3. [CustomVison Service](https://www.customvision.ai/): The service stub in Azure that will train the model.
 4. [Application Insights](https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview): An APIM for Azure Web Services.
 
+Here is an architectural view of the solution that is deployed in this workshop:
+
+![ARCH](/imgs/visionarch.png)
+
+1. Via GitHub actions the client code will be deployed as a static website. The api code will be deployed as an Azure Function.
+
+Some configuration steps will occur in the workshop below to connect the solution together.
+
+2. User loads website and creates images to be trained
+3. User submits training data which calls the Azure Function, save method.
+4. The save method stores the images in the blob storage account which is accessible by Custom Vision.
+5. User opens the Custom Vision portal to perform the training.
+6. User downloads the TensorFlow.js client side file which contains the trained model. The model is manually uploaded to the website.
+7. User reloads the web page
+
+Now on to the deployment ...
+
 To expedite this portion of the workshop a bash shell script was created that runs the Azure CLI to deploy the resources. You can view [deploy.sh](https://github.com/sethjuarez/vision/blob/master/deploy.sh) to see the infrastructure setup.  
 
 ### **Instructions:**
@@ -256,3 +273,9 @@ The point here is that the static web site that was created to host the web appl
 ![REFRESH](/imgs/26-refresh.png)
 
 Go ahead and play with the application now, make goofy faces, use the different hand symbols you trained for rock, paper, and scissors and check the scoring results.
+
+-----
+HINTS
+
+A [video walkthrough](https://visionworkshop32904.blob.core.windows.net/public/instructions.mp4) of the entire process
+
