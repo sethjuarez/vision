@@ -1,4 +1,4 @@
 {
-    "saveEndpoint": "https://supervizfuncapp.azurewebsites.net/api/save",
+    "saveEndpoint": "https://seerfuncapp.azurewebsites.net/api/save",
     "maxSubmitCount": 4
 }
