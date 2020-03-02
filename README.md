@@ -3,7 +3,7 @@
 This workshop is a segment from the Ignite 2019 App Developer Keynote: "[App Development for Everyone](https://youtu.be/h9YaYdoqiRA?t=3890)" by Scott Hanselman and Seth Juarez. 
 
 
-In the Keynote Scott built a "[Rock, Paper, Scissors, Lizard, Spock](https://github.com/microsoft/RockPaperScissorsLizardSpock)" web application in multiple languages which also includes the content from this workshop using [Azure CustomVision](https://www.customvision.ai/).
+In the Keynote Scott built a "[Rock, Paper, Scissors, Lizard, Spock](https://github.com/microsoft/RockPaperScissorsLizardSpock)" web application in multiple languages which also includes the content from this workshop using [Azure CustomVision](https://www.customvision.ai/?WT.mc_id=rpsls-github-sejuare).
 
 In this workshop we will build an end to end CustomVision solution that will demonstrate the infrastrucure required in Azure and how to build and train a custom vision based model. This workshop will not require any previous development experience and can be executed from any laptop with a modern browser (Edge, Chrome, Firefox, etc...)
 
@@ -39,7 +39,7 @@ If you choose to use your local environment please ensure:
 
 1. Python 3.7.6 and Pip3 are installed 
 2. python and pip are linked to Python3 and Pip3
-2. [Azure Command Line Interface](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) is installed
+2. [Azure Command Line Interface](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest&WT.mc_id=rpsls-github-sejuare) is installed
 3. Git is installed
 4. You know how to use the tools above as instructions below will focus on the Cloud Shell
 
@@ -51,10 +51,10 @@ If you choose to use your local environment please ensure:
 In this step we will get access to the Git repo for this workshop and deploy the infrasructure necessary to support CustomVision.
 
 The services that will be deployed are all Platform as a Service and very lightweight:
-1. [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/functions-overview): Contains a single method to save the UI data to Custom Vision
-2. [Azure Storage](https://docs.microsoft.com/en-us/azure/storage/common/storage-introduction): Static Website to host the UI page and store the images
-3. [CustomVison Service](https://www.customvision.ai/): The service stub in Azure that will train the model.
-4. [Application Insights](https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview): An APIM for Azure Web Services.
+1. [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/functions-overview?WT.mc_id=rpsls-github-sejuare): Contains a single method to save the UI data to Custom Vision
+2. [Azure Storage](https://docs.microsoft.com/en-us/azure/storage/common/storage-introduction?WT.mc_id=rpsls-github-sejuare): Static Website to host the UI page and store the images
+3. [CustomVison Service](https://www.customvision.ai/?WT.mc_id=rpsls-github-sejuare): The service stub in Azure that will train the model.
+4. [Application Insights](https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?WT.mc_id=rpsls-github-sejuare): An APIM for Azure Web Services.
 
 Here is an architectural view of the solution that is deployed in this workshop:
 
