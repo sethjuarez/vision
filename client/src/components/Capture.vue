@@ -22,9 +22,16 @@
             <div v-if="interval != null">Click Spacebar to Stop!</div>
         </div>
         <div id="images">
-            <video @click="predict()" id="video" width="320" height="240" autoplay></video>
-            <canvas id="rendered" width="224" height="224"></canvas>
-            <canvas id="canvas" width="320" height="240"></canvas>
+            <div id="videoPane">
+                <video id="video" width="320" height="240" autoplay></video>
+                <div id="deviceOptions">
+                    <select name="deviceSelection" @input="setDevice">
+                        <option :key="idx" v-for="(ditem, idx) in devices" value="ditem.deviceId">{{ditem.label}}</option>
+                    </select>
+                </div>
+                <canvas id="rendered" width="224" height="224"></canvas>
+                <canvas id="canvas" width="320" height="240"></canvas>
+            </div>
             <div id="output">
                 <div id="flavor" v-if="modelmeta != null">Type: {{modelmeta.Flavor}}</div>
                 <div id="exported" v-if="modelmeta != null">Exported: {{modelmeta.ExportedDate}}</div>
@@ -82,7 +89,8 @@
                     'width': 0,
                     'height': 0
                 },
-                appSettings: ''
+                appSettings: '',
+                devices: []
             }
         },
         mounted: async function () {
@@ -93,19 +101,15 @@
             let canvas = document.getElementById('canvas')
             this.canvas = canvas.getContext('2d')
 
-            // run and start video
-            this.video = document.getElementById('video')
+            // enumerate video devices
             if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                let stream = await navigator.mediaDevices.getUserMedia({ video: true })
-                let tracks = stream.getVideoTracks()
-                if(tracks.length >= 1) {
-                    let settings = tracks[0].getSettings()
-                    this.vdim.width = settings.width
-                    this.vdim.height = settings.height
-                    this.video.srcObject = stream
-                    this.video.play()
-                }
+                const items = await navigator.mediaDevices.enumerateDevices();
+                this.devices = items.filter(device => device.kind === 'videoinput');
             }
+
+            // get video reference
+            this.video = document.getElementById('video')
+            
 
             // load appSettings
             let response = await axios.get('config.json')
@@ -117,6 +121,28 @@
             
         },
         methods: {
+            setDevice: async function(value) {
+                const device = this.devices[value.target.selectedOptions[0].index]
+                
+                if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                    let stream = await navigator.mediaDevices.getUserMedia({
+                        video: {
+                            deviceId: {
+                                exact: device.deviceId
+                            }
+                        }
+                    })
+                    let tracks = stream.getVideoTracks()
+                    if(tracks.length >= 1) {
+                        let settings = tracks[0].getSettings()
+                        this.vdim.width = settings.width
+                        this.vdim.height = settings.height
+                        this.video.srcObject = stream
+                        this.video.play()
+                    }
+                }
+                console.log(device)
+            },
             loadModel: async function() {
                 // load model
                 this.model = new cvstfjs.ClassificationModel()
@@ -242,10 +268,20 @@
         height: 240px;
         width: 320px;
         margin-left: 10px;
-        float: left;
+        float: right;
         clear: right;
         text-align: left;
         padding: 0px 4px;
+    }
+
+    #videoPane {
+        float: left;
+        height: 275px;
+    }
+
+    #deviceOptions {
+        margin-top: 20px;
+        padding: 10px;
     }
 
     #images{
