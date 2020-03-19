@@ -215,7 +215,7 @@ Need a hint? ok follow, me ....
 
 ![STORAGE](/imgs/14-Storage.png)
 
-2. Go to Static Websites in the left hand pane and pull out the URL in the window that comes up
+2. Go to "Static website" in the left hand pane and pull out the URL in the window that comes up
 
 ![STORAGEURL](/imgs/15-storageurl.png)
 
