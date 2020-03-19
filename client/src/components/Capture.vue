@@ -81,7 +81,7 @@
                 interval: null,
                 model: null,
                 modelmeta: null,
-                labels: ['none', 'rock', 'paper', 'scissors'],
+                labels: ['none', 'Bit', 'Doug', 'Penny'],
                 modelLabels: [],
                 probabilities: [],
                 guess: 'none',
