@@ -77,6 +77,7 @@ To expedite this portion of the workshop a bash shell script was created that ru
 
 ### **Instructions:**
 1. Sign-in to Github and fork this repo
+2. Visit your forked repo, and click on the Actions tab. If necessary, click on the button "I understand my workflows, go ahead and run them."
 2. Sign-in to the Azure Portal at: https://portal.azure.com
 3. Open the Azure Shell
 
