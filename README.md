@@ -159,7 +159,7 @@ Then, copy the URL for the endpoint
 
 Now we need to update the config file for the application.
 
-If you are using Azure Cloud Shell you can use the built-in editor:
+If you are using Azure Cloud Shell you can use the built-in editor (click the `{ }` icon in the toolbar):
 
 ![EDITOR](/imgs/10-basheditor.png)
 
@@ -167,7 +167,7 @@ If you are using your local machine, use your favorite editor
 
 and open the following file:
 
-/client/public/config.json
+vision/client/public/config.json
 
 ![CONFIG](/imgs/11-configjson.png)
 
