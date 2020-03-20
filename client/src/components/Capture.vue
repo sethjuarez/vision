@@ -9,7 +9,7 @@
             </ol>
             <p><strong>Training Instructions</strong></p>
             <p>Once you uploaded a balanced set of pictures for each category
-                head over to <a href="customvision.ai">customvision</a> to train and download the model</p>
+                head over to <a href="https://customvision.ai">customvision</a> to train and download the model</p>
         </div>
         <div id="radioselection">
             <span :key="item+index" v-for="(item, index) in labels">
