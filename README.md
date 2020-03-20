@@ -226,6 +226,7 @@ and App On
 Now the super fun part, we have to capture images to train the model. There will be a model error first load. That is because you have not created the model yet. First we need to create the images that will be inputs to train the model.
 
 Follow the directions on the screen to capture images of yourself performing "rock", "paper", "scissors".
+(Note: you may need to switch the camera selection option under the left pane before the app will display an image.)
 
 ## Step 5 - Training Day
 
@@ -234,6 +235,7 @@ Ok, everyone on the floor and give me 50....
 Ok, maybe not. Instead let's train the model we created.
 
 1. Go to https://www.customvision.ai/projects and log-in with the same credentials you used to access the portal.
+   (NOTE: If you see an error message of the form "API keys are not ready for use", try signing out of customvision.ai and then signing back in.)
 
 2. Open the "Seer" project
 
