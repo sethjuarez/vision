@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1>rock-paper-scissors</h1>
+    <h1>Capture your Cheerleaders</h1>
     <Capture/>
   </div>
 </template>
