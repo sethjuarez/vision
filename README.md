@@ -265,9 +265,11 @@ Ok, maybe not. Instead let's train the model we created.
 
 ![WEB](/imgs/24-web.png)
 
-The point here is that the static web site that was created to host the web application lives in a container. We need to upload the model to the website so when we next load the application it includes the model.
+The point here is that the static web site that was created to host the web application lives in a container. 
+We need to upload the model to the website so when we next load the application it includes the model.
 
-3. Once inside the $Web folder. Click on "Upload" and select all the files you extracted to a folder.
+3. Once inside the $Web folder. Click on "Upload" in the top menu bar and select all the files you extracted to a folder.
+   Be sure to click "Advanced" in the right pane and specify "model" in the "Upload to folder" field.
 
 ![UPLOAD](/imgs/25-upload.png)
 
