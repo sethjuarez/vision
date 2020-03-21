@@ -1,4 +1,0 @@
-{
-    "saveEndpoint": "https://confboostfuncapp.azurewebsites.net/api/save",
-    "maxSubmitCount": 4
-}
