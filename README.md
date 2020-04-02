@@ -77,6 +77,7 @@ To expedite this portion of the workshop a bash shell script was created that ru
 
 ### **Instructions:**
 1. Sign-in to Github and fork this repo
+2. Visit your forked repo, and click on the Actions tab. If necessary, click on the button "I understand my workflows, go ahead and run them."
 2. Sign-in to the Azure Portal at: https://portal.azure.com
 3. Open the Azure Shell
 
@@ -158,7 +159,7 @@ Then, copy the URL for the endpoint
 
 Now we need to update the config file for the application.
 
-If you are using Azure Cloud Shell you can use the built-in editor:
+If you are using Azure Cloud Shell you can use the built-in editor (click the `{ }` icon in the toolbar):
 
 ![EDITOR](/imgs/10-basheditor.png)
 
@@ -166,7 +167,7 @@ If you are using your local machine, use your favorite editor
 
 and open the following file:
 
-/client/public/config.json
+vision/client/public/config.json
 
 ![CONFIG](/imgs/11-configjson.png)
 
@@ -214,7 +215,7 @@ Need a hint? ok follow, me ....
 
 ![STORAGE](/imgs/14-Storage.png)
 
-2. Go to Static Websites in the left hand pane and pull out the URL in the window that comes up
+2. Go to "Static website" in the left hand pane and pull out the URL in the window that comes up
 
 ![STORAGEURL](/imgs/15-storageurl.png)
 
@@ -225,6 +226,7 @@ and App On
 Now the super fun part, we have to capture images to train the model. There will be a model error first load. That is because you have not created the model yet. First we need to create the images that will be inputs to train the model.
 
 Follow the directions on the screen to capture images of yourself performing "rock", "paper", "scissors".
+(Note: you may need to switch the camera selection option under the left pane before the app will display an image.)
 
 ## Step 5 - Training Day
 
@@ -233,6 +235,7 @@ Ok, everyone on the floor and give me 50....
 Ok, maybe not. Instead let's train the model we created.
 
 1. Go to https://www.customvision.ai/projects and log-in with the same credentials you used to access the portal.
+   (NOTE: If you see an error message of the form "API keys are not ready for use", try signing out of customvision.ai and then signing back in.)
 
 2. Open the "Seer" project
 
@@ -262,9 +265,11 @@ Ok, maybe not. Instead let's train the model we created.
 
 ![WEB](/imgs/24-web.png)
 
-The point here is that the static web site that was created to host the web application lives in a container. We need to upload the model to the website so when we next load the application it includes the model.
+The point here is that the static web site that was created to host the web application lives in a container. 
+We need to upload the model to the website so when we next load the application it includes the model.
 
-3. Once inside the $Web folder. Click on "Upload" and select all the files you extracted to a folder.
+3. Once inside the $Web folder. Click on "Upload" in the top menu bar and select all the files you extracted to a folder.
+   Be sure to click "Advanced" in the right pane and specify "model" in the "Upload to folder" field.
 
 ![UPLOAD](/imgs/25-upload.png)
 
