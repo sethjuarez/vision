@@ -3,7 +3,7 @@
 This workshop is a segment from the Ignite 2019 App Developer Keynote: "[App Development for Everyone](https://youtu.be/h9YaYdoqiRA?t=3890)" by Scott Hanselman and Seth Juarez. 
 
 
-In the Keynote Scott built a "[Rock, Paper, Scissors, Lizard, Spock](https://github.com/microsoft/RockPaperScissorsLizardSpock)" web application in multiple languages which also includes the content from this workshop using [Azure CustomVision](https://www.customvision.ai/).
+In the Keynote Scott built a "[Rock, Paper, Scissors, Lizard, Spock](https://github.com/microsoft/RockPaperScissorsLizardSpock)" web application in multiple languages which also includes the content from this workshop using [Azure CustomVision](https://www.customvision.ai/?WT.mc_id=rpsls-github-sejuare).
 
 In this workshop we will build an end to end CustomVision solution that will demonstrate the infrastrucure required in Azure and how to build and train a custom vision based model. This workshop will not require any previous development experience and can be executed from any laptop with a modern browser (Edge, Chrome, Firefox, etc...)
 
@@ -39,7 +39,7 @@ If you choose to use your local environment please ensure:
 
 1. Python 3.7.6 and Pip3 are installed 
 2. python and pip are linked to Python3 and Pip3
-2. [Azure Command Line Interface](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) is installed
+2. [Azure Command Line Interface](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest&WT.mc_id=rpsls-github-sejuare) is installed
 3. Git is installed
 4. You know how to use the tools above as instructions below will focus on the Cloud Shell
 
@@ -51,10 +51,10 @@ If you choose to use your local environment please ensure:
 In this step we will get access to the Git repo for this workshop and deploy the infrasructure necessary to support CustomVision.
 
 The services that will be deployed are all Platform as a Service and very lightweight:
-1. [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/functions-overview): Contains a single method to save the UI data to Custom Vision
-2. [Azure Storage](https://docs.microsoft.com/en-us/azure/storage/common/storage-introduction): Static Website to host the UI page and store the images
-3. [CustomVison Service](https://www.customvision.ai/): The service stub in Azure that will train the model.
-4. [Application Insights](https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview): An APIM for Azure Web Services.
+1. [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/functions-overview?WT.mc_id=rpsls-github-sejuare): Contains a single method to save the UI data to Custom Vision
+2. [Azure Storage](https://docs.microsoft.com/en-us/azure/storage/common/storage-introduction?WT.mc_id=rpsls-github-sejuare): Static Website to host the UI page and store the images
+3. [CustomVison Service](https://www.customvision.ai/?WT.mc_id=rpsls-github-sejuare): The service stub in Azure that will train the model.
+4. [Application Insights](https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?WT.mc_id=rpsls-github-sejuare): An APIM for Azure Web Services.
 
 Here is an architectural view of the solution that is deployed in this workshop:
 
@@ -77,6 +77,7 @@ To expedite this portion of the workshop a bash shell script was created that ru
 
 ### **Instructions:**
 1. Sign-in to Github and fork this repo
+2. Visit your forked repo, and click on the Actions tab. If necessary, click on the button "I understand my workflows, go ahead and run them."
 2. Sign-in to the Azure Portal at: https://portal.azure.com
 3. Open the Azure Shell
 
@@ -158,7 +159,7 @@ Then, copy the URL for the endpoint
 
 Now we need to update the config file for the application.
 
-If you are using Azure Cloud Shell you can use the built-in editor:
+If you are using Azure Cloud Shell you can use the built-in editor (click the `{ }` icon in the toolbar):
 
 ![EDITOR](/imgs/10-basheditor.png)
 
@@ -166,7 +167,7 @@ If you are using your local machine, use your favorite editor
 
 and open the following file:
 
-/client/public/config.json
+vision/client/public/config.json
 
 ![CONFIG](/imgs/11-configjson.png)
 
@@ -214,7 +215,7 @@ Need a hint? ok follow, me ....
 
 ![STORAGE](/imgs/14-Storage.png)
 
-2. Go to Static Websites in the left hand pane and pull out the URL in the window that comes up
+2. Go to "Static website" in the left hand pane and pull out the URL in the window that comes up
 
 ![STORAGEURL](/imgs/15-storageurl.png)
 
@@ -225,6 +226,7 @@ and App On
 Now the super fun part, we have to capture images to train the model. There will be a model error first load. That is because you have not created the model yet. First we need to create the images that will be inputs to train the model.
 
 Follow the directions on the screen to capture images of yourself performing "rock", "paper", "scissors".
+(Note: you may need to switch the camera selection option under the left pane before the app will display an image.)
 
 ## Step 5 - Training Day
 
@@ -233,6 +235,7 @@ Ok, everyone on the floor and give me 50....
 Ok, maybe not. Instead let's train the model we created.
 
 1. Go to https://www.customvision.ai/projects and log-in with the same credentials you used to access the portal.
+   (NOTE: If you see an error message of the form "API keys are not ready for use", try signing out of customvision.ai and then signing back in.)
 
 2. Open the "Seer" project
 
@@ -262,9 +265,11 @@ Ok, maybe not. Instead let's train the model we created.
 
 ![WEB](/imgs/24-web.png)
 
-The point here is that the static web site that was created to host the web application lives in a container. We need to upload the model to the website so when we next load the application it includes the model.
+The point here is that the static web site that was created to host the web application lives in a container. 
+We need to upload the model to the website so when we next load the application it includes the model.
 
-3. Once inside the $Web folder. Click on "Upload" and select all the files you extracted to a folder.
+3. Once inside the $Web folder. Click on "Upload" in the top menu bar and select all the files you extracted to a folder.
+   Be sure to click "Advanced" in the right pane and specify "model" in the "Upload to folder" field.
 
 ![UPLOAD](/imgs/25-upload.png)
 
