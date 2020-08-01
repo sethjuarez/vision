@@ -1,4 +1,0 @@
-{
-    "saveEndpoint": "https://seerfuncapp.azurewebsites.net/api/save",
-    "maxSubmitCount": 4
-}

@@ -1,24 +1,24 @@
 <template>
   <div id="app">
     <h1>rock-paper-scissors</h1>
-    <Capture/>
+    <Capture />
   </div>
 </template>
 
 <script>
-import Capture from './components/Capture.vue'
+import Capture from "./components/Capture.vue";
 
 export default {
-  name: 'app',
+  name: "App",
   components: {
     Capture
   }
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

@@ -1,6 +1,4 @@
 {
-  "scriptFile": "save.py",
-  "entryPoint": "main",
   "bindings": [
     {
       "authLevel": "anonymous",
@@ -8,14 +6,15 @@
       "direction": "in",
       "name": "req",
       "methods": [
-        "options",
         "post"
-      ]
+      ],
+      "route": "save"
     },
     {
       "type": "http",
       "direction": "out",
-      "name": "$return"
+      "name": "res"
     }
-  ]
+  ],
+  "scriptFile": "../dist/PostImages/index.js"
 }
