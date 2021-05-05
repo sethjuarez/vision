@@ -28,18 +28,18 @@ Please follow the directions [here](https://www.microsoftazurepass.com/Home/HowT
 It is recommended you perform this step before the workshop. Once you complete the process it may take a few minutes for the subscription to be activated.
 
 You can log into Azure at:
-https://portal.azure.com
+https://portal.azure.com/?WT.mc_id=aiml-0000-sejuare
 
 **Please make sure you use the credentials you used to sign-up for the Azure Pass to sign-in. If your browser has cached Work or School credentials already, then you may want to use a Private browser session to access the portal.**
 
 ## Local Environment Notes
-You can use either the [Azure Cloud Shell](https://shell.azure.com) or your local terminal to perform this workshop. It is recommended to use the Cloud Shell as all the dependencies are already installed.
+You can use either the [Azure Cloud Shell](https://shell.azure.com/?WT.mc_id=aiml-0000-sejuare) or your local terminal to perform this workshop. It is recommended to use the Cloud Shell as all the dependencies are already installed.
 
 If you choose to use your local environment please ensure:
 
 1. Python 3.7.6 and Pip3 are installed 
 2. python and pip are linked to Python3 and Pip3
-2. [Azure Command Line Interface](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest&WT.mc_id=rpsls-github-sejuare) is installed
+2. [Azure Command Line Interface](https://docs.microsoft.com/cli/azure/install-azure-cli?view=azure-cli-latest&WT.mc_id=aiml-0000-sejuare) is installed
 3. Git is installed
 4. You know how to use the tools above as instructions below will focus on the Cloud Shell
 
@@ -51,10 +51,10 @@ If you choose to use your local environment please ensure:
 In this step we will get access to the Git repo for this workshop and deploy the infrasructure necessary to support CustomVision.
 
 The services that will be deployed are all Platform as a Service and very lightweight:
-1. [Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/functions-overview?WT.mc_id=rpsls-github-sejuare): Contains a single method to save the UI data to Custom Vision
-2. [Azure Storage](https://docs.microsoft.com/en-us/azure/storage/common/storage-introduction?WT.mc_id=rpsls-github-sejuare): Static Website to host the UI page and store the images
+1. [Azure Functions](https://docs.microsoft.com/azure/azure-functions/functions-overview?WT.mc_id=aiml-0000-sejuare): Contains a single method to save the UI data to Custom Vision
+2. [Azure Storage](https://docs.microsoft.com/azure/storage/common/storage-introduction?WT.mc_id=aiml-0000-sejuare): Static Website to host the UI page and store the images
 3. [CustomVison Service](https://www.customvision.ai/?WT.mc_id=rpsls-github-sejuare): The service stub in Azure that will train the model.
-4. [Application Insights](https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?WT.mc_id=rpsls-github-sejuare): An APIM for Azure Web Services.
+4. [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/app-insights-overview?WT.mc_id=aiml-0000-sejuare): An APIM for Azure Web Services.
 
 Here is an architectural view of the solution that is deployed in this workshop:
 
@@ -78,7 +78,7 @@ To expedite this portion of the workshop a bash shell script was created that ru
 ### **Instructions:**
 1. Sign-in to Github and fork this repo
 2. Visit your forked repo, and click on the Actions tab. If necessary, click on the button "I understand my workflows, go ahead and run them."
-2. Sign-in to the Azure Portal at: https://portal.azure.com
+2. Sign-in to the Azure Portal at: https://portal.azure.com/?WT.mc_id=aiml-0000-sejuare
 3. Open the Azure Shell
 
 ![SHELL](/imgs/01-CloudShell.png)
