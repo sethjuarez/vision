@@ -1,3 +1,6 @@
+> **⚠️ This repository has been archived and is no longer actively maintained.**
+> It is preserved here for historical reference. The content was created for the Ignite 2019 App Developer Keynote and may reference services or configurations that are out of date.
+
 # Welcome to the Azure Vision Workshop!
 
 This workshop is a segment from the Ignite 2019 App Developer Keynote: "[App Development for Everyone](https://youtu.be/h9YaYdoqiRA?t=3890)" by Scott Hanselman and Seth Juarez. 
